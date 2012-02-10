@@ -78,6 +78,7 @@ GEM
       padrino-core (= 0.10.5)
     padrino-sprockets (0.0.1)
       sprockets
+    pg (0.13.0)
     polyglot (0.3.3)
     rack (1.4.1)
     rack-protection (1.2.0)
@@ -125,6 +126,7 @@ DEPENDENCIES
   heroku
   padrino (= 0.10.5)
   padrino-sprockets
+  pg
   rake
   sass
   sinatra-flash

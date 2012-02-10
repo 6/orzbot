@@ -26,6 +26,7 @@
 # override these settings in the subapps as needed.
 #
 Padrino.configure_apps do
+  ENV['DEBUG'] = 'yes'
   # enable :sessions
   set :session_secret, ENV['SESSION_SECRET'] || '8bd0d18c482e3ce04d3f6cb6e2b69212c0672144dc6e75627416a3153cebec3b'
 end

@@ -1,5 +1,5 @@
-!!!5
-%html
+!!! 5
+%html{:data => {:debug => ENV["DEBUG"]}}
   %head
     %title= [@title, "orzbot"].compact.join(" | ")
     %link{:href => "/assets/application.css", :media => "screen", :rel => "stylesheet", :type => "text/css"}

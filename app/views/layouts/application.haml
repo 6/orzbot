@@ -1,0 +1,9 @@
+!!!5
+%html
+  %head
+    %title= [@title, "orzbot"].compact.join(" | ")
+    %link{:href => "/assets/application.css", :media => "screen", :rel => "stylesheet", :type => "text/css"}
+    %script{:src => "/assets/application.js"}
+    = yield_content :include
+  %body
+    #main= yield

@@ -5,6 +5,11 @@ class Orzbot < Padrino::Application
   register Padrino::Helpers
 
   enable :sessions
+  
+  # Sprockets support	
+  require 'sprockets'
+  register Padrino::Sprockets
+  sprockets
 
   ##
   # Caching support

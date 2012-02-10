@@ -17,6 +17,9 @@ Orzbot.controllers  do
   # get "/example" do
   #   "Hello world!"
   # end
-
+  
+  get :home, :map => "/" do
+    render :home
+  end
   
 end

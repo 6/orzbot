@@ -15,6 +15,9 @@ gem 'haml'
 gem 'activerecord', :require => "active_record"
 gem 'sqlite3'
 
+gem 'padrino-sprockets', :require => 'padrino/sprockets'
+gem 'coffee-script'
+
 # Test requirements
 
 # Padrino Stable Gem

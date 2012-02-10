@@ -11,6 +11,10 @@ class Orzbot < Padrino::Application
   register Padrino::Sprockets
   sprockets
 
+  configure :development do
+    ENV['DEBUG'] = 'yes'
+  end
+
   ##
   # Caching support
   #

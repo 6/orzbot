@@ -13,6 +13,7 @@ class Orzbot < Padrino::Application
 
   configure :development do
     ENV['DEBUG'] = 'yes'
+    ENV['ADMIN_PASS'] = 'admin'
   end
 
   ##

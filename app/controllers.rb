@@ -18,7 +18,9 @@ Orzbot.controllers  do
   #   "Hello world!"
   # end
   
-  get :home, :map => "/" do
+  get :home, :map => "/(:locale)" do
+    I18n.locale = get_locale(params[:locale])
+    @animes = Anime.all(:order => 'updated_at ASC')
     render :home
   end
   

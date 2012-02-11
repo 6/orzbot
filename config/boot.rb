@@ -18,12 +18,14 @@ Bundler.require(:default, PADRINO_ENV)
 # Add your before load hooks here
 #
 Padrino.before_load do
+  I18n.locale = :en
 end
 
 ##
 # Add your after load hooks here
 #
 Padrino.after_load do
+  Encoding.default_internal = nil
 end
 
 Padrino.load!

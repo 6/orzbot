@@ -19,4 +19,12 @@ Orzbot.helpers do
     end
     par
   end
+  
+  def get_locale(locale_s)
+    if locale_s and %w[en ja].include?(locale_s)
+      locale_s.to_sym
+    else
+      :en
+    end
+  end
 end

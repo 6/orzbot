@@ -9,9 +9,7 @@ Orzbot.controllers  do
   
   Orzbot.controllers :anime do
     before do
-      unless session[:is_admin]
-        redirect url(:home)
-      end
+      redirect url(:home) unless session[:is_admin]
     end
     
     get :edit, :with => :id do
@@ -23,10 +21,9 @@ Orzbot.controllers  do
       @anime = Anime.find(params[:id])
       params['anime'] = parse_anime_params(params[:anime])
       if @anime.andand.update_attributes(params[:anime])
-        flash[:notice] = "Updated!"
         redirect url(:home)
       else
-        flash[:notice] = "Error!"
+        flash[:warning] = "Error!"
         redirect url(:anime, :edit, :id)
       end
     end
@@ -34,9 +31,7 @@ Orzbot.controllers  do
     post :create do
       params['anime'] = parse_anime_params(params[:anime])
       @anime = Anime.new(params[:anime])
-      if @anime.save
-        flash[:notice] = "Success!"
-      else
+      unless @anime.save
         flash[:warning] = "Error!"
       end
       redirect url(:home)
@@ -44,20 +39,12 @@ Orzbot.controllers  do
   end
   
   Orzbot.controllers :admin do
-    before :except => [:index, :login] do
-      unless session[:is_admin]
-        redirect url(:home)
-      end
-    end
-
     get :index do
       render 'admin/login'
     end
 
     post :login do
-      if params[:password] == ENV["ADMIN_PASS"]
-        session[:is_admin] = true
-      end
+      session[:is_admin] = true if params[:password] == ENV["ADMIN_PASS"]
       redirect url(:home)
     end
 

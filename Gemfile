@@ -11,6 +11,7 @@ gem 'padrino-sprockets', :require => 'padrino/sprockets'
 gem 'coffee-script'
 gem 'padrino', '0.10.5'
 gem 'pg'
+gem 'tzinfo'
 
 group :development do
   gem 'foreman'

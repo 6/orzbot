@@ -133,4 +133,5 @@ DEPENDENCIES
   rake
   sass
   sinatra-flash
+  tzinfo
   unicorn

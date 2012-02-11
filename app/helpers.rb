@@ -12,6 +12,8 @@ Orzbot.helpers do
   def parse_anime_params(par)
     return nil unless par
     unless par['start_date'].nil?
+      Time.zone = "Asia/Tokyo"
+      Chronic.time_class = Time.zone
       par['start_date'] = Chronic.parse(par[:start_date])
     end
     unless par['air_days'].nil?

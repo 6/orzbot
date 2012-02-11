@@ -1,11 +1,11 @@
 # Helper methods defined here can be accessed in any controller or view in the application
 
 Orzbot.helpers do
-  def format_date(datet)
+  def format_date(datet, only_date = false)
     if datet.nil?
       "[none]"
     else
-      datet.strftime("%Y/%m/%d %H:%M")
+      only_date ? datet.strftime("%Y/%m/%d") : datet.strftime("%Y/%m/%d %H:%M")
     end
   end
   

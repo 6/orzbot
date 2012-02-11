@@ -14,9 +14,13 @@
 #   }
 #
 ActiveRecord::Base.configurations[:development] = {
-  :adapter => 'sqlite3',
-  :database => Padrino.root('db', "orzbot_development.db")
-
+  :adapter => 'postgresql',
+  :encoding => 'utf8',
+  :database => 'orzbot_development',
+  :username  => 'postgres',
+  :password  => '',
+  :host => 'localhost',
+  :port => '5432'
 }
 
 postgres = URI.parse(ENV['DATABASE_URL'] || '')

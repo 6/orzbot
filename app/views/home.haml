@@ -12,7 +12,17 @@
   %tbody
     - @animes.each do |a|
       %tr
-        %td= I18n.locale == :en ? a.title_en : a.title_ja
+        %td
+          - a_title = I18n.locale == :en ? a.title_en : a.title_ja
+          - if session[:is_admin]
+            =link_to a_title, url(:anime, :edit, a.id)
+          - else
+            = a_title
         %td
         %td
         %td=link_to a.mal_id, "http://myanimelist.net/anime/#{a.mal_id}"
+
+- if session[:is_admin]
+  - form_for :anime, url(:anime, :create) do |f|
+    =partial "anime/form", :locals => { :f => f }
+  =link_to "logout", url(:admin, :logout)

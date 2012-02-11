@@ -26,18 +26,54 @@ Orzbot.controllers  do
     render :about
   end
   
+  Orzbot.controllers :anime do
+    before do
+      unless session[:is_admin]
+        redirect url(:home)
+      end
+    end
+    
+    get :edit, :with => :id do
+      @anime = Anime.find(params[:id])
+      render 'admin/anime_edit'
+    end
+    
+    post :edit, :with => :id do
+      @anime = Anime.find(params[:id])
+      if @anime.andand.update_attributes(params[:anime])
+        flash[:notice] = "Updated!"
+        redirect url(:admin, :index)
+      else
+        flash[:notice] = "Error!"
+        redirect url(:anime, :edit, :id)
+      end
+    end
+    
+    post :create do
+      params[:anime]['start_date'] = Chronic.parse(params[:anime][:start_date])
+      @anime = Anime.new(params[:anime])
+      if @anime.save
+        flash[:notice] = "Success!"
+      else
+        flash[:warning] = "Error!"
+      end
+      redirect url(:admin, :index)
+    end
+  end
+  
   Orzbot.controllers :admin do
     before :except => [:index, :login] do
       unless session[:is_admin]
-        redirect url_for(:home)
+        redirect url(:admin, :index)
       end
     end
 
     get :index do
       if session[:is_admin]
+        @animes = Anime.all(:order => 'updated_at ASC')
         render 'admin/index'
       else
-        redirect url_for(:admin, :login)
+        redirect url(:admin, :login)
       end
     end
 
@@ -49,12 +85,12 @@ Orzbot.controllers  do
       if params[:password] == ENV["ADMIN_PASS"]
         session[:is_admin] = true
       end
-      redirect url_for(:admin, :index)
+      redirect url(:admin, :index)
     end
 
     get :logout do
       session[:is_admin] = nil
-      redirect url_for(:home)
+      redirect url(:home)
     end
   end
 end

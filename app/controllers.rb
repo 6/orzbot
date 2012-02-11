@@ -3,12 +3,6 @@ Orzbot.controllers  do
     Encoding.default_internal = nil
   end
   
-  get :home, :map => "/(:locale)", :provides => [:html, :rss], :priority => :low do
-    I18n.locale = get_locale(params[:locale])
-    @animes = Anime.all(:order => 'updated_at ASC')
-    render :home
-  end
-  
   get :about do
     render :about
   end
@@ -80,5 +74,11 @@ Orzbot.controllers  do
       session[:is_admin] = nil
       redirect url(:home)
     end
+  end
+  
+  get :home, :map => "/(:locale)", :provides => [:html, :rss] do
+    I18n.locale = get_locale(params[:locale])
+    @animes = Anime.all(:order => 'updated_at ASC')
+    render :home
   end
 end

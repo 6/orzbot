@@ -22,24 +22,39 @@ Orzbot.controllers  do
     render :home
   end
   
-  get :admin do
-    if session[:is_admin]
-      render 'admin/index'
-    else
+  get :about do
+    render :about
+  end
+  
+  Orzbot.controllers :admin do
+    before :except => [:index, :login] do
+      unless session[:is_admin]
+        redirect url_for(:home)
+      end
+    end
+
+    get :index do
+      if session[:is_admin]
+        render 'admin/index'
+      else
+        redirect url_for(:admin, :login)
+      end
+    end
+
+    get :login do
       render 'admin/login'
     end
-  end
-  
-  post :admin_login do
-    if params[:password] == ENV["ADMIN_PASS"]
-      session[:is_admin] = true
+
+    post :login do
+      if params[:password] == ENV["ADMIN_PASS"]
+        session[:is_admin] = true
+      end
+      redirect url_for(:admin, :index)
     end
-    redirect url_for(:admin)
+
+    get :logout do
+      session[:is_admin] = nil
+      redirect url_for(:home)
+    end
   end
-  
-  get :admin_logout do
-    session[:is_admin] = nil
-    redirect url_for(:home)
-  end
-  
 end

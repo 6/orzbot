@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 1) do
+ActiveRecord::Schema.define(:version => 2) do
 
   create_table "animes", :force => true do |t|
     t.string   "title_en"
@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(:version => 1) do
     t.integer  "mal_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "air_days"
+    t.string   "ignore_dates"
   end
 
 end

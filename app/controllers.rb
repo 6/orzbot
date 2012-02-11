@@ -40,6 +40,7 @@ Orzbot.controllers  do
     
     post :edit, :with => :id do
       @anime = Anime.find(params[:id])
+      params['anime'] = parse_anime_params(params[:anime])
       if @anime.andand.update_attributes(params[:anime])
         flash[:notice] = "Updated!"
         redirect url(:admin, :index)
@@ -50,7 +51,7 @@ Orzbot.controllers  do
     end
     
     post :create do
-      params[:anime]['start_date'] = Chronic.parse(params[:anime][:start_date])
+      params['anime'] = parse_anime_params(params[:anime])
       @anime = Anime.new(params[:anime])
       if @anime.save
         flash[:notice] = "Success!"

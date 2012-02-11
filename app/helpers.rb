@@ -8,4 +8,15 @@ Orzbot.helpers do
       datet.strftime("%Y/%m/%d %H:%M")
     end
   end
+  
+  def parse_anime_params(par)
+    return nil unless par
+    unless par['start_date'].nil?
+      par['start_date'] = Chronic.parse(par[:start_date])
+    end
+    unless par['air_days'].nil?
+      par['air_days'] = par['air_days'].join(',')
+    end
+    par
+  end
 end

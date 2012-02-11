@@ -4,6 +4,8 @@
       %th Title (en)
       %th Title (jp)
       %th Start date
+      %th Ignore
+      %th Airs on
       %th Duration
       %th Episodes
       %th MAL
@@ -14,6 +16,8 @@
         %td= a.title_en
         %td= a.title_jp
         %td= format_date(a.start_date)
+        %td= a.ignore_dates
+        %td= a.air_days
         %td= "#{a.duration_minutes} min"
         %td= a.episode_count
         %td=link_to a.mal_id, "http://myanimelist.net/anime/#{a.mal_id}"

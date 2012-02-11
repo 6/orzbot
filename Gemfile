@@ -1,6 +1,8 @@
 source :rubygems
 gem 'unicorn'
 gem 'rake'
+gem 'andand'
+gem 'chronic'
 gem 'sinatra-flash', :require => 'sinatra/flash'
 gem 'sass'
 gem 'haml'

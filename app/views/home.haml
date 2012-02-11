@@ -1,6 +1,7 @@
 - @title = "Anime schedule"
 =link_to 'English', url(:home), :class => I18n.locale == :en ? 'active' : ''
-=link_to '日本語', url(:home, 'ja'), :class => I18n.locale == :ja ? 'active' : ''
+=link_to '日本語', url(:home, :locale => 'ja'), :class => I18n.locale == :ja ? 'active' : ''
+=link_to 'RSS', url(:home, :locale => I18n.locale, :format => 'rss')
 %table.table
   %thead
     %tr

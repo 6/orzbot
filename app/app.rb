@@ -13,6 +13,7 @@ class Orzbot < Padrino::Application
 
   configure :development do
     ENV['DEBUG'] = 'yes'
+    ENV['ROOT_URL'] = 'http://localhost:5000'
     ENV['ADMIN_PASS'] = 'admin'
   end
 

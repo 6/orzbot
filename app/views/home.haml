@@ -12,7 +12,7 @@
   %tbody
     - @animes.each do |a|
       %tr
-        %td= I18n.locale == :en ? a.title_en : a.title_jp
+        %td= I18n.locale == :en ? a.title_en : a.title_ja
         %td
         %td
         %td=link_to a.mal_id, "http://myanimelist.net/anime/#{a.mal_id}"

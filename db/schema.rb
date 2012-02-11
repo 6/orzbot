@@ -11,11 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 2) do
+ActiveRecord::Schema.define(:version => 3) do
 
   create_table "animes", :force => true do |t|
     t.string   "title_en"
-    t.string   "title_jp"
+    t.string   "title_ja"
     t.integer  "episode_count"
     t.integer  "duration_minutes"
     t.datetime "start_date"

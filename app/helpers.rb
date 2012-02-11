@@ -21,6 +21,7 @@ Orzbot.helpers do
   end
   
   def get_locale(locale_s)
+    locale_s = locale_s[0] if locale_s.is_a? Array
     if locale_s and %w[en ja].include?(locale_s)
       locale_s.to_sym
     else

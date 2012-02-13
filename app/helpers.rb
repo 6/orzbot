@@ -30,4 +30,23 @@ Orzbot.helpers do
       :en
     end
   end
+  
+  # based on:
+  # http://stackoverflow.com/questions/1065320/in-rails-display-time-between-two-dates-in-english
+  def time_diff(from_time, to_time)
+    distance_in_seconds = distance_in_seconds_copy = ((to_time - from_time).abs).round
+    components = []
+    # TODO internationalize
+    %w(day hour minute second).each do |interval|
+      next if interval == 'second' and distance_in_seconds >= 60 * 60
+      next if interval == 'minute' and distance_in_seconds >= 60 * 60 * 24
+      next if interval == 'hour' and distance_in_seconds >= 60 * 60 * 24 * 7
+      if distance_in_seconds_copy >= 1.send(interval)
+        delta = (distance_in_seconds_copy / 1.send(interval)).floor
+        distance_in_seconds_copy -= delta.send(interval)
+        components << pluralize(delta, interval)
+      end
+    end
+    components.join(", ")
+  end
 end

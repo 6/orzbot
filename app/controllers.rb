@@ -56,7 +56,7 @@ Orzbot.controllers  do
   
   get :home, :map => "/(:locale)", :provides => [:html, :rss] do
     I18n.locale = get_locale(params[:locale])
-    @animes = Anime.all()
+    @animes = Anime.all(:order => get_locale(params[:locale]) == :ja ? 'lower(title_ja) ASC' : 'lower(title_en) ASC')
     render :home
   end
 end

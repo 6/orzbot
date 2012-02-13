@@ -18,6 +18,7 @@ class Anime < ActiveRecord::Base
   end
   
   def parsed_ignore_dates
-    self.ignore_dates.split(",").map{|i| Chronic.parse(i)}.sort
+    ignore = self.ignore_dates.split(",").map{|i| Chronic.parse(i)}.sort
+    ignore[0].nil? ? [] : ignore
   end
 end

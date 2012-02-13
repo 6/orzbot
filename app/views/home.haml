@@ -18,8 +18,19 @@
             =link_to a_title, url(:anime, :edit, a.id)
           - else
             = a_title
-        %td
-        %td
+        - a_on_air = a.on_air_now?
+        - if a_on_air or not a.airing?
+          %td{:colspan => "2"}
+            - if a_on_air
+              = "Currently airing (#{time_diff(a_on_air, Time.now)} left of #{a.duration_minutes} minutes)"
+            - elsif a.finished_airing?
+              = "Finished airing #{a.episode_count} episodes"
+            - else
+              = "Starts airing in #{time_diff(Time.now, a.start_date)}"
+        - else
+          - status = a.status
+          %td= "Episode #{status[:prev_episode_number]} aired #{time_diff(Time.now, status[:prev_date])} ago"
+          %td= "Episode #{status[:prev_episode_number]+1} airs in #{time_diff(Time.now, status[:next_date])}"
         %td=link_to a.mal_id, "http://myanimelist.net/anime/#{a.mal_id}"
 
 - if session[:is_admin]

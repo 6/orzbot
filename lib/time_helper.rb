@@ -21,4 +21,25 @@ module TimeHelper
       (0..6).to_a.rotate(day2).index(day1)
     end
   end
+  
+  def self.closest_date(start_date, days, ignore, forwards = true)
+    # TODO clean this up
+    now = self.to_jst(Time.now)
+    closest = nil
+    days.each{|d|
+      diff = wday_diff(now.wday, d, forwards)
+      ignore.each{|i|
+        next if i.nil?
+        date = forwards ? now + diff.days : now - diff.days
+        diff += 7 if date.year == i.year and date.month == i.month and date.day == i.day
+      }
+      if diff == 0
+        air_time = self.create_time_jst now.year, now.month, now.day, start_date.strftime("%H"), start_date.strftime("%M")
+        diff = 7 if (forwards and now > air_time) or (not forwards and now < air_time)
+      end
+      closest = {:day => d, :diff => diff} if closest.nil? or diff < closest[:diff]
+    }
+    c = forwards ? now + closest[:diff].days : now - closest[:diff].days
+    self.create_time_jst c.year, c.month, c.day, start_date.strftime("%H"), start_date.strftime("%M")
+  end
 end

@@ -16,10 +16,10 @@ a {
 }
 
 #header-row {
-  padding:5px 0;
+  padding:5px 0 2px;
   #header-right {
-    padding-top: 24px;
-    padding-right: 5px;
+    padding-top: 25px;
+    padding-right: 152px;
     text-align:right;
     a {
       padding: 0 5px;
@@ -29,10 +29,18 @@ a {
       }
     }
   }
+  #danbo {
+    position:absolute;
+    top:0;
+    right:42px;
+    z-index:1;
+  }
 }
 
 #main {
-  background: rgba(255, 255, 255, 0.3);
+  position:relative;
+  z-index:2;
+  background: #4cb7ab;
   border:1px solid #076;
   @include borderRadius(5px);
   padding:12px 20px;

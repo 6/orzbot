@@ -11,5 +11,6 @@
       .span4#logo-wrap=link_to image_tag("logo.png", :alt => "orzbot"), url(:home)
       .span8
         #header-right=yield_content :header_right
+      #danbo=image_tag("danbo.png", :alt => "danbo")
     .flash=[:error, :warning, :notice].map { |type| flash_tag(type, :class => "message #{type}") }.join
     #main= yield

@@ -11,10 +11,6 @@ a {
   }
 }
 
-.table {
-  margin-bottom: 5px;
-}
-
 #header-row {
   padding:5px 0 2px;
   #header-right {
@@ -40,9 +36,22 @@ a {
 #main {
   position:relative;
   z-index:2;
-  background: #4cb7ab;
-  border:1px solid #076;
-  @include borderRadius(5px);
-  padding:12px 20px;
+  background:#ccfaf2;
+  border:1px solid #065;
   margin-bottom: 50px;
+}
+
+#anime-table {
+  margin-bottom:0;
+  border-collapse:separate;
+  td {
+    border-color:#dff;
+    border-bottom:1px solid #add;
+  }
+  .links {
+    line-height:14px;
+    img {
+      vertical-align:middle;
+    }
+  }
 }

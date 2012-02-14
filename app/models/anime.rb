@@ -2,6 +2,18 @@ class Anime < ActiveRecord::Base
   validates_presence_of :title_en
   validates_presence_of :title_ja
   
+  def self.airing
+    animes = []
+    all().each{|a|
+      next unless a.airing?
+      animes << {:model => a, :status => a.status}
+    }
+    animes.sort!{|x,y|
+      x[:status][:next_date] <=> y[:status][:next_date]
+    }
+    animes
+  end
+  
   def start_date
     start = read_attribute(:start_date)
     start ? TimeHelper.to_jst(start) : nil

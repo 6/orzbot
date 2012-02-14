@@ -11,7 +11,8 @@
       %th Next episode
       %th Links
   %tbody
-    - @animes.each do |a|
+    - @animes.each do |a_obj|
+      - a = a_obj[:model]
       %tr
         %td
           - a_title = I18n.locale == :en ? a.title_en : a.title_ja
@@ -29,9 +30,8 @@
             - else
               = "Starts airing in #{time_diff(Time.now, a.start_date)}"
         - else
-          - status = a.status
-          %td= "Episode #{status[:prev_episode_number]} aired #{time_diff(Time.now, status[:prev_date])} ago"
-          %td= "Episode #{status[:prev_episode_number]+1} airs in #{time_diff(Time.now, status[:next_date])}"
+          %td= "Episode #{a_obj[:status][:prev_episode_number]} aired #{time_diff(Time.now, a_obj[:status][:prev_date])} ago"
+          %td= "Episode #{a_obj[:status][:prev_episode_number]+1} airs in #{time_diff(Time.now, a_obj[:status][:next_date])}"
         %td=link_to a.mal_id, "http://myanimelist.net/anime/#{a.mal_id}"
 
 - if session[:is_admin]

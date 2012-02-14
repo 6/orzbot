@@ -1,9 +1,40 @@
 @import 'mixins';
 
 body {	
-   background: #eee;
+  background: #098;
 }
 
-a.active {
-  font-weight: 700;
+a {
+  color: #dee;
+  &:hover {
+    color: #fff;
+  }
+}
+
+.table {
+  margin-bottom: 5px;
+}
+
+#header-row {
+  padding:5px 0;
+  #header-right {
+    padding-top: 24px;
+    padding-right: 5px;
+    text-align:right;
+    a {
+      padding: 0 5px;
+      &.active {
+        color: #fff;
+        font-weight: 700;
+      }
+    }
+  }
+}
+
+#main {
+  background: rgba(255, 255, 255, 0.3);
+  border:1px solid #076;
+  @include borderRadius(5px);
+  padding:12px 20px;
+  margin-bottom: 50px;
 }

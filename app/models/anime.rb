@@ -9,10 +9,9 @@ class Anime < ActiveRecord::Base
   def self.airing
     animes = []
     all().each{|a|
-      next unless a.airing?
-      animes << {:model => a, :status => a.status, :on_air_now => a.on_air_now?}
+      animes << {:model => a, :status => a.status, :on_air_now => a.on_air_now?} if a.airing?
     }
-    animes.sort!{|x,y|
+    animes.sort{|x,y|
       if x[:on_air_now] and y[:on_air_now]
         x[:on_air_now] <=> y[:on_air_now]
       elsif x[:on_air_now]
@@ -21,7 +20,6 @@ class Anime < ActiveRecord::Base
         x[:status][:next_date] <=> y[:status][:next_date]
       end
     }
-    animes
   end
   
   def start_date

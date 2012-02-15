@@ -28,7 +28,7 @@ class Anime < ActiveRecord::Base
     ignore = self.parsed_ignore_dates
     days = self.numeric_air_days
     start = self.start_date
-    days.rotate! days.index(start.wday) # start with correct weekday
+    days.rotate! days.index(start.wday) || 0 # start with correct weekday
     days.sort!
     episodes_per_week = days.length
     i = 0

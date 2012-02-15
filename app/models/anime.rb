@@ -10,10 +10,16 @@ class Anime < ActiveRecord::Base
     animes = []
     all().each{|a|
       next unless a.airing?
-      animes << {:model => a, :status => a.status}
+      animes << {:model => a, :status => a.status, :on_air_now => a.on_air_now?}
     }
     animes.sort!{|x,y|
-      x[:status][:next_date] <=> y[:status][:next_date]
+      if x[:on_air_now] and y[:on_air_now]
+        x[:on_air_now] <=> y[:on_air_now]
+      elsif x[:on_air_now]
+        -1
+      else
+        x[:status][:next_date] <=> y[:status][:next_date]
+      end
     }
     animes
   end

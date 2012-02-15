@@ -1,26 +1,32 @@
-%p
-  =f.label :title_en
-  =f.text_field :title_en
-%p
-  =f.label :title_ja
-  =f.text_field :title_ja
-%p
-  =f.label :start_date
-  =f.text_field :start_date
-%p
-  =f.label :ignore_dates
-  =f.text_field :ignore_dates
-%p.multiselect
-  =label_tag "anime[air_days]"
-  =select_tag "anime[air_days]", :options => ['Mo', 'Tu','We','Th','Fr','Sa','Su'], :selected => @anime ? @anime.air_days.split(',') : '', :multiple => :multiple
-%p
-  =f.label :duration_minutes
-  =f.text_field :duration_minutes
-%p
-  =f.label :episode_count
-  =f.text_field :episode_count
-%p
-  =f.label :mal_id
-  =f.text_field :mal_id
-%p
-  =f.submit "Save", :class => :btn
+.row-fluid
+  .span3
+    %p
+      =f.label :title_en
+      =f.text_field :title_en
+    %p
+      =f.label :title_ja
+      =f.text_field :title_ja
+    %p
+      =f.label :start_date
+      =f.text_field :start_date
+  .span3
+    %p.multiselect
+      =label_tag "anime[air_days]"
+      =select_tag "anime[air_days]", :options => ['Mo', 'Tu','We','Th','Fr','Sa','Su'], :selected => @anime ? @anime.air_days.split(',') : '', :multiple => :multiple
+    %p
+      =f.label :ignore_dates
+      =f.text_field :ignore_dates
+  .span3
+    %p
+      =f.label :duration_minutes
+      =f.text_field :duration_minutes
+    %p
+      =f.label :episode_count
+      =f.text_field :episode_count
+    %p
+      =f.label :mal_id
+      =f.text_field :mal_id
+  .span3
+    %p
+      =f.submit "Save", :class => "btn btn-large"
+      =link_to "logout", url(:admin, :logout)

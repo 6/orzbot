@@ -28,6 +28,5 @@
       %td.links=link_to image_tag("favicon-mal.png", :alt => "MAL"), "http://myanimelist.net/anime/#{a.mal_id}"
 
 - if session[:is_admin]
-  - form_for :anime, url(:anime, :create) do |f|
+  - form_for :anime, url(:anime, :create), :id => "anime-form" do |f|
     =partial "anime/form", :locals => { :f => f }
-  =link_to "logout", url(:admin, :logout)

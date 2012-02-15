@@ -1,2 +1,2 @@
-- form_for :anime, url(:anime, :edit, :id => @anime.id) do |f|
+- form_for :anime, url(:anime, :edit, :id => @anime.id), :id => "anime-form" do |f|
   =partial "anime/form", :locals => { :f => f }

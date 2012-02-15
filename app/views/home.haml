@@ -3,7 +3,7 @@
   =link_to 'English', url(:home), :class => I18n.locale == :en ? 'active' : ''
   =link_to '日本語', url(:home, :locale => 'ja'), :class => I18n.locale == :ja ? 'active' : ''
   =link_to 'RSS', url(:home, :locale => I18n.locale, :format => 'rss')
-%table#anime-table.table
+%table.anime-table.table
   - @animes.each do |a_obj|
     - a = a_obj[:model]
     %tr
@@ -20,11 +20,21 @@
             = "Currently airing (#{time_diff(a_on_air, Time.now)} left of #{a.duration_minutes} minutes)"
           - elsif a.finished_airing?
             = "Finished airing #{a.episode_count} episodes"
-          - else
-            = "Starts airing in #{time_diff(Time.now, a.start_date)}"
       - else
         %td.prev= "Episode #{a_obj[:status][:prev_episode_number]} aired #{time_diff(Time.now, a_obj[:status][:prev_date])} ago"
         %td.next= "Episode #{a_obj[:status][:prev_episode_number]+1} airs in #{time_diff(Time.now, a_obj[:status][:next_date])}"
+      %td.links=link_to image_tag("favicon-mal.png", :alt => "MAL"), "http://myanimelist.net/anime/#{a.mal_id}"
+%h2 Coming soon
+%table#anime-table-upcoming.anime-table.table
+  - @coming_soon.each do |a|
+    %tr
+      %td.title
+        - a_title = I18n.locale == :en ? a.title_en : a.title_ja
+        - if session[:is_admin]
+          =link_to a_title, url(:anime, :edit, a.id)
+        - else
+          = a_title
+      %td.on-air{:colspan => "2"}= "Starts airing in #{time_diff(Time.now, a.start_date)}"
       %td.links=link_to image_tag("favicon-mal.png", :alt => "MAL"), "http://myanimelist.net/anime/#{a.mal_id}"
 
 - if session[:is_admin]

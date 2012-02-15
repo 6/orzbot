@@ -36,23 +36,32 @@ a {
 #main {
   position:relative;
   z-index:2;
-  border:4px solid rgba(255,255,255, 0.4);
   margin-bottom: 50px;
   a {
     color: #298;
   }
+  h2 {
+    color: #fff;
+    text-shadow: 1px 1px #054;
+    font-size: 15px;
+    line-height: 15px;
+    padding:25px 0 5px;
+    text-transform:uppercase;
+  }
 }
 
-#anime-table {
-  background:#ccfaf2;
+.anime-table {
+  border:4px solid rgba(255,255,255, 0.4);
   margin-bottom:0;
   border-collapse:separate;
   td {
+    background:#ccfaf2;
     border-color:#dff;
     border-bottom:1px solid #add;
   }
   .links {
     line-height:14px;
+    width:6%;
     img {
       vertical-align:middle;
     }

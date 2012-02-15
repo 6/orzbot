@@ -57,6 +57,7 @@ Orzbot.controllers  do
   get :home, :map => "/(:locale)", :provides => [:html, :rss] do
     I18n.locale = get_locale(params[:locale])
     @animes = Anime.airing
+    @coming_soon = Anime.where("start_date > ?", Time.now).order("start_date ASC")
     render :home
   end
 end

@@ -1,6 +1,10 @@
 class Anime < ActiveRecord::Base
+  WDAY_HASH = {"Mo"=>1,"Tu"=>2,"We"=>3,"Th"=>4,"Fr"=>5,"Sa"=>6,"Su"=>0}
+
   validates_presence_of :title_en
   validates_presence_of :title_ja
+  
+  after_create :set_defaults
   
   def self.airing
     animes = []
@@ -77,13 +81,17 @@ class Anime < ActiveRecord::Base
   end
   
   def numeric_air_days
-    self.air_days.split(",").map{|wday_s|
-      {"Mo"=>1,"Tu"=>2,"We"=>3,"Th"=>4,"Fr"=>5,"Sa"=>6,"Su"=>0}[wday_s]
-    }.sort
+    self.air_days.split(",").map{|wday_s| WDAY_HASH[wday_s]}.sort
   end
   
   def parsed_ignore_dates
     ignore = self.ignore_dates.split(",").map{|i| Chronic.parse(i)}.sort
     ignore[0].nil? ? [] : ignore
+  end
+  
+  def set_defaults
+    self.air_days ||= WDAY_HASH.invert[self.start_date.wday]
+    self.duration_minutes ||= 30
+    self.save
   end
 end

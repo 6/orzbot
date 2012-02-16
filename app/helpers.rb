@@ -31,6 +31,11 @@ Orzbot.helpers do
     end
   end
   
+  def locale_string
+    # English should be blank string so don't have duplicate content
+    I18n.locale == :en ? nil : I18n.locale
+  end
+  
   # based on:
   # http://stackoverflow.com/questions/1065320/in-rails-display-time-between-two-dates-in-english
   def time_diff(from_time, to_time)

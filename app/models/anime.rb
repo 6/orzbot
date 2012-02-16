@@ -16,6 +16,8 @@ class Anime < ActiveRecord::Base
         x[:on_air_now] <=> y[:on_air_now]
       elsif x[:on_air_now]
         -1
+      elsif y[:on_air_now]
+        1
       else
         x[:status][:next_date] <=> y[:status][:next_date]
       end

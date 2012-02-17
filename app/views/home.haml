@@ -13,15 +13,10 @@
           =link_to a_title, url(:anime, :edit, a.id)
         - else
           = a_title
-      - a_on_air = a.on_air_now?
-      - if a_on_air or not a.airing?
-        %td.on-air{:colspan => "2"}
-          - if a_on_air
-            = "Currently airing (#{time_diff(a_on_air, Time.now)} left of #{a.duration_minutes} minutes)"
-          - elsif a.finished_airing?
-            = "Finished airing #{a.episode_count} episodes"
-          - else
-            = "Starts airing in #{time_diff(a.start_date, Time.now)}"
+      - if a_obj[:on_air_now]
+        %td.on-air{:colspan => "2"}= "Currently airing (#{time_diff(a_obj[:on_air_now], Time.now)} left of #{a.duration_minutes} minutes)"
+      - elsif not a.airing?
+        %td.not-airing{:colspan => "2"}= "Starts airing in #{time_diff(a.start_date, Time.now)}"
       - else
         %td.prev= "Episode #{a_obj[:status][:prev_episode_number]} aired #{time_diff(Time.now, a_obj[:status][:prev_date])} ago"
         %td.next= "Episode #{a_obj[:status][:prev_episode_number]+1} airs in #{time_diff(Time.now, a_obj[:status][:next_date])}"

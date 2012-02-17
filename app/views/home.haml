@@ -1,8 +1,8 @@
 - @title = @action == :upcoming ? t(:title_upcoming) : t(:title_airing)
 - content_for :header_right do
-  =link_to 'English', url(:home), :class => I18n.locale == :en ? 'active' : ''
-  =link_to '日本語', url(:home, :locale => 'ja'), :class => I18n.locale == :ja ? 'active' : ''
-  =link_to 'RSS', @rss_url
+  =link_to 'English', url(@action), :class => I18n.locale == :en ? 'active' : ''
+  =link_to '日本語', url(@action, :locale => 'ja'), :class => I18n.locale == :ja ? 'active' : ''
+  =link_to 'RSS', url(@action, :locale => I18n.locale, :format => 'rss')
 %table.anime-table.table
   - @animes.each do |a_obj|
     - a = a_obj[:model]

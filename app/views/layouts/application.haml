@@ -23,7 +23,7 @@
         #logo-wrap
           =link_to image_tag("logo.png", :alt => t(:app)), url(:home, :locale => locale_string)
         #header-left
-          =link_to t(:airing), url(:home, :locale => locale_string), :class => @action == :airing ? "active" : ""
+          =link_to t(:airing), url(:home, :locale => locale_string), :class => @action == :home ? "active" : ""
           =link_to t(:upcoming), url(:upcoming, :locale => locale_string), :class => @action == :upcoming ? "active": ""
       .span6
         #header-right=yield_content :header_right

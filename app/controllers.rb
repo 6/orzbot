@@ -61,14 +61,12 @@ Orzbot.controllers  do
       @animes << {:model => a, :status => nil, :on_air_now => false}
     }
     @action = :upcoming
-    @rss_url = url(:upcoming, :locale => I18n.locale, :format => 'rss')
     render :home
   end
   
   get :home, :map => "/(:locale)", :provides => [:html, :rss] do
     @animes = Anime.airing
-    @action = :airing
-    @rss_url = url(:home, :locale => I18n.locale, :format => 'rss')
+    @action = :home
     render :home
   end
 end

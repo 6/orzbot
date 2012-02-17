@@ -1,0 +1,7 @@
+ja:
+  app: "orzbot"
+  meta_description: "最新アニメのテレビ放送スケジュール。"
+  title_airing: "放送中アニメ情報"
+  title_upcoming: "放送予定アニメ情報"
+  airing: "放送中"
+  upcoming: "放送予定"

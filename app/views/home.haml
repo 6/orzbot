@@ -1,4 +1,4 @@
-- @title = @action == :upcoming ? "upcoming anime series" : "anime airing schedule"
+- @title = @action == :upcoming ? t(:title_upcoming) : t(:title_airing)
 - content_for :header_right do
   =link_to 'English', url(:home), :class => I18n.locale == :en ? 'active' : ''
   =link_to '日本語', url(:home, :locale => 'ja'), :class => I18n.locale == :ja ? 'active' : ''

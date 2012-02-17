@@ -8,7 +8,7 @@ xml.rss "version" => "2.0", "xmlns:dc" => "http://purl.org/dc/elements/1.1/" do
     for a in @animes
       xml.item do
         xml.title I18n.locale == :en ? a[:model].title_en : a[:model].title_ja
-        xml.description a[:on_air_now] ? "Currently airing" : (a[:model].airing? ? "Episode #{a[:status][:prev_episode_number]+1} airs in #{time_diff(Time.now, a[:status][:next_date])}" : "Starts airing in #{time_diff(a[:model].start_date, Time.now)}")
+        xml.description a[:on_air_now] ? t(:currently_airing) : (a[:model].airing? ? "#{t(:episode_x, :x => a[:status][:prev_episode_number]+1)} #{t(:airs_in_x, :x => time_diff(Time.now, a[:status][:next_date])).downcase}" : t(:starts_airing_x, :x => time_diff(a[:model].start_date, Time.now)))
         xml.link "#{ENV['ROOT_URL']}#{url(:home)}"
       end
     end

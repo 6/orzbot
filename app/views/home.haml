@@ -14,12 +14,12 @@
         - else
           = a_title
       - if a_obj[:on_air_now]
-        %td.on-air{:colspan => "2"}= "Currently airing (#{time_diff(a_obj[:on_air_now], Time.now)} left of #{a.duration_minutes} minutes)"
+        %td.on-air{:colspan => "2"}= t(:currently_airing)
       - elsif not a.airing?
-        %td.not-airing{:colspan => "2"}= "Starts airing in #{time_diff(a.start_date, Time.now)}"
+        %td.not-airing{:colspan => "2"}= t(:starts_airing_x, :x => time_diff(a.start_date, Time.now))
       - else
-        %td.prev= "Episode #{a_obj[:status][:prev_episode_number]} aired #{time_diff(Time.now, a_obj[:status][:prev_date])} ago"
-        %td.next= "Episode #{a_obj[:status][:prev_episode_number]+1} airs in #{time_diff(Time.now, a_obj[:status][:next_date])}"
+        %td.prev= "#{t(:episode_x, :x => a_obj[:status][:prev_episode_number])} #{t(:aired_x_ago, :x => time_diff(Time.now, a_obj[:status][:prev_date])).downcase}"
+        %td.next= "#{t(:episode_x, :x => a_obj[:status][:prev_episode_number]+1)} #{t(:airs_in_x, :x => time_diff(Time.now, a_obj[:status][:next_date])).downcase}"
       %td.links=link_to image_tag("favicon-mal.png", :alt => "MAL"), "http://myanimelist.net/anime/#{a.mal_id}"
 
 - if session[:is_admin]

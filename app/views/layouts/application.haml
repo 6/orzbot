@@ -19,8 +19,13 @@
       })();
   %body.container-fluid
     .row-fluid#header-row
-      .span8
-      .span4#logo-wrap=link_to image_tag("logo.png", :alt => "orzbot"), url(:home, :locale => locale_string)
+      .span6
+        #logo-wrap
+          =link_to image_tag("logo.png", :alt => "orzbot"), url(:home, :locale => locale_string)
+        #header-left
+          =link_to "Airing", url(:home, :locale => locale_string), :class => @action == :airing ? "active" : ""
+          =link_to "Upcoming", url(:upcoming, :locale => locale_string), :class => @action == :upcoming ? "active": ""
+      .span6
         #header-right=yield_content :header_right
       #danbo=image_tag("danbo.png", :alt => "danbo")
     .flash=[:error, :warning, :notice].map { |type| flash_tag(type, :class => "message #{type}") }.join

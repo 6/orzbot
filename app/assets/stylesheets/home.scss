@@ -13,17 +13,31 @@ a {
 
 #header-row {
   padding:5px 0 2px;
-  #header-right {
+  a.active {
+    color: #fff;
+    font-weight: 700;
+  }
+  #logo-wrap {
+    float:left;
+  }
+  #header-left,#header-right {
     padding-top: 25px;
-    padding-right: 152px;
-    text-align:right;
     a {
-      padding: 0 5px;
+      margin: 0 5px;
       &.active {
-        color: #fff;
-        font-weight: 700;
+        background:rgba(255,255,255,0.3);
+        padding: 4px 8px 5px;
+        @include borderRadius(3px);
       }
     }
+  }
+  #header-left {
+    float:left;
+    padding-left: 30px;
+  }
+  #header-right {
+    padding-right: 152px;
+    text-align:right;
   }
   #danbo {
     position:absolute;

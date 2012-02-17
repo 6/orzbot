@@ -55,9 +55,20 @@ Orzbot.controllers  do
     end
   end
   
+  get :upcoming, :map => "/upcoming(/:locale)", :provides => [:html, :rss] do
+    @animes = []
+    Anime.where("start_date > ?", Time.now).order("start_date ASC").each{|a|
+      @animes << {:model => a, :status => nil, :on_air_now => false}
+    }
+    @action = :upcoming
+    @rss_url = url(:upcoming, :locale => I18n.locale, :format => 'rss')
+    render :home
+  end
+  
   get :home, :map => "/(:locale)", :provides => [:html, :rss] do
     @animes = Anime.airing
-    @coming_soon = Anime.where("start_date > ?", Time.now).order("start_date ASC")
+    @action = :airing
+    @rss_url = url(:home, :locale => I18n.locale, :format => 'rss')
     render :home
   end
 end

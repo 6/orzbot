@@ -1,7 +1,7 @@
 Orzbot.controllers  do
   before do
     Encoding.default_internal = nil
-    I18n.locale = get_locale(params[:locale]) unless params[:locale].nil?
+    I18n.locale = get_locale(params[:locale]) || :en
   end
   
   get :about do

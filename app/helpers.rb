@@ -49,9 +49,13 @@ Orzbot.helpers do
       if distance_in_seconds_copy >= 1.send(interval)
         delta = (distance_in_seconds_copy / 1.send(interval)).floor
         distance_in_seconds_copy -= delta.send(interval)
-        components << pluralize(delta, interval)
+        if I18n.locale == :en
+          components << pluralize(delta, t(interval.to_sym))
+        else
+          components << "#{delta}#{t(interval.to_sym)}"
+        end
       end
     end
-    components.join(", ")
+    components.join(I18n.locale == :en ? ", " : "") 
   end
 end

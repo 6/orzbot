@@ -5,3 +5,7 @@ ja:
   title_upcoming: "放送予定アニメ情報"
   airing: "放送中"
   upcoming: "放送予定"
+  day: "日"
+  hour: "時間"
+  minute: "分"
+  second: "秒"

@@ -5,3 +5,7 @@ en:
   title_upcoming: "upcoming anime series"
   airing: "Airing"
   upcoming: "Upcoming"
+  day: "day"
+  hour: "hour"
+  minute: "minute"
+  second: "second"

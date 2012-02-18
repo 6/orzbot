@@ -1,3 +1,20 @@
+# == Schema Information
+#
+# Table name: animes
+#
+#  id               :integer         not null, primary key
+#  title_en         :string(255)
+#  title_ja         :string(255)
+#  episode_count    :integer
+#  duration_minutes :integer
+#  start_date       :datetime
+#  mal_id           :integer
+#  created_at       :datetime
+#  updated_at       :datetime
+#  air_days         :string(255)
+#  ignore_dates     :string(255)
+#
+
 class Anime < ActiveRecord::Base
   WDAY_HASH = {"Mo"=>1,"Tu"=>2,"We"=>3,"Th"=>4,"Fr"=>5,"Sa"=>6,"Su"=>0}
 

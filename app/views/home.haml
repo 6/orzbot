@@ -7,7 +7,7 @@
   - @animes.each do |a_obj|
     - a = a_obj[:model]
     %tr
-      %td.title=link_to a.title, session[:is_admin] ? url(:anime, :edit, a.id) : a.mal_url
+      %td.title=link_to a.title, session[:is_admin] ? url(:anime, :edit, a.id) : url(:anime, :index, a.id, :locale => locale_string)
       - if a_obj[:on_air_now]
         %td.on-air{:colspan => "2"}= t(:currently_airing)
       - elsif not a.airing?

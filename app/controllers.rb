@@ -9,7 +9,7 @@ Orzbot.controllers  do
   end
   
   Orzbot.controllers :anime do
-    before do
+    before :except => :index do
       redirect url(:home) unless session[:is_admin]
     end
     
@@ -36,6 +36,11 @@ Orzbot.controllers  do
         flash[:warning] = "Error!"
       end
       redirect url(:home)
+    end
+    
+    get :index, :map => "/anime/:id(/:locale)" do
+      @anime = Anime.find(params[:id])
+      render 'anime/index'
     end
   end
   

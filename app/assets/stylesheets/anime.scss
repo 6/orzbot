@@ -1,0 +1,40 @@
+@import 'mixins';
+
+#anime-page-wrap {
+  border:7px solid rgba(255,255,255, 0.4);
+  @include borderRadius(5px);
+  #anime-page {
+    background: #fff;
+    padding:10px 20px;
+    h1 {
+      font-size: 18px;
+      float:left;
+      line-height: 30px;
+    }
+    .links {
+      list-style: none;
+      padding:0;
+      margin:8px 15px 0;
+      float:left;
+      li {
+        padding:0 5px;
+        display:inline;
+      }
+    }
+    .separator {
+      display:inline;
+      margin:0 15px 0 12px;
+      padding:5px 0;
+      border-right: 1px solid #ccc;
+    }
+    .status {
+      float:left;
+      font-size: 15px;
+      margin-top: 7px;
+      color: #777;
+      .time {
+        color: #000;
+      }
+    }
+  }
+}

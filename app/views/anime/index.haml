@@ -1,0 +1,19 @@
+- content_for :header_right do
+  =link_to 'English', url(:anime, :index, @anime.id), :class => I18n.locale == :en ? 'active' : ''
+  =link_to '日本語', url(:anime, :index, @anime.id, :locale => 'ja'), :class => I18n.locale == :ja ? 'active' : ''
+#anime-page-wrap
+  #anime-page
+    %h1= @anime.title
+    %ul.links
+      %li=link_to image_tag("favicon-mal.png", :alt => "MAL"), @anime.mal_url
+    .status
+      - if @anime.on_air_now?
+        =t(:currently_airing)
+      - elsif not @anime.airing?
+        =t(:starts_airing_x, :x => "<span class='time'>#{time_diff(@anime.start_date, Time.now)}</span>")
+      - else
+        - status = @anime.status
+        ="#{t(:episode_x, :x => status[:prev_episode_number])} #{t(:aired_x_ago, :x => "<span class='time'>#{time_diff(Time.now, status[:prev_date])}</span>").downcase}"
+        .separator &nbsp;
+        ="#{t(:episode_x, :x => status[:prev_episode_number]+1)} #{t(:airs_in_x, :x => "<span class='time'>#{time_diff(Time.now, status[:next_date])}</span>").downcase}"
+    .clearfix

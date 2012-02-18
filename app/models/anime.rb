@@ -28,6 +28,14 @@ class Anime < ActiveRecord::Base
     start = read_attribute(:start_date)
     start ? TimeHelper.to_jst(start) : nil
   end
+  
+  def title
+    I18n.locale == :en ? self.title_en : self.title_ja
+  end
+  
+  def mal_url
+    "http://myanimelist.net/anime/#{self.mal_id}"
+  end
 
   def status
     # TODO clean this up

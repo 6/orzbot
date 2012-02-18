@@ -52,7 +52,7 @@ a {
   z-index:2;
   margin-bottom: 50px;
   a {
-    color: #298;
+    color: #087;
   }
   h2 {
     color: #fff;
@@ -73,12 +73,32 @@ a {
     background:#ccfaf2;
     border-color:#dff;
     border-bottom:1px solid #add;
+    line-height: 20px;
   }
-  .links {
-    line-height:14px;
-    width:6%;
-    img {
-      vertical-align:middle;
+  tr:hover {
+    td {
+      background: #fff;
     }
+  }
+  td.title {
+    width: 30%;
+    padding-left: 18px;
+    font-size: 16px;
+    line-height:40px;
+  }
+}
+
+td {
+  .time-wrap {
+    margin-bottom:0;
+    color: #777;
+    font-size: 15px;
+    .time {
+      color: #000;
+    }
+  }
+  &.on-air, &.not-airing p {
+    font-size: 16px;
+    line-height: 40px;
   }
 }

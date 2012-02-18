@@ -7,20 +7,15 @@
   - @animes.each do |a_obj|
     - a = a_obj[:model]
     %tr
-      %td.title
-        - a_title = I18n.locale == :en ? a.title_en : a.title_ja
-        - if session[:is_admin]
-          =link_to a_title, url(:anime, :edit, a.id)
-        - else
-          = a_title
+      %td.title=link_to a.title, session[:is_admin] ? url(:anime, :edit, a.id) : a.mal_url
       - if a_obj[:on_air_now]
         %td.on-air{:colspan => "2"}= t(:currently_airing)
       - elsif not a.airing?
-        %td.not-airing{:colspan => "2"}= t(:starts_airing_x, :x => time_diff(a.start_date, Time.now))
+        %td.not-airing{:colspan => "2"}
+          %p.time-wrap= t(:starts_airing_x, :x => "<span class='time'>#{time_diff(a.start_date, Time.now)}</span>")
       - else
-        %td.prev= "#{t(:episode_x, :x => a_obj[:status][:prev_episode_number])} #{t(:aired_x_ago, :x => time_diff(Time.now, a_obj[:status][:prev_date])).downcase}"
-        %td.next= "#{t(:episode_x, :x => a_obj[:status][:prev_episode_number]+1)} #{t(:airs_in_x, :x => time_diff(Time.now, a_obj[:status][:next_date])).downcase}"
-      %td.links=link_to image_tag("favicon-mal.png", :alt => "MAL"), "http://myanimelist.net/anime/#{a.mal_id}"
+        %td.prev= "#{t(:episode_x, :x => a_obj[:status][:prev_episode_number])} <p class='time-wrap'>#{t(:aired_x_ago, :x => "<span class='time'>#{time_diff(Time.now, a_obj[:status][:prev_date])}</span>").downcase}</p>"
+        %td.next= "#{t(:episode_x, :x => a_obj[:status][:prev_episode_number]+1)} <p class='time-wrap'>#{t(:airs_in_x, :x => "<span class='time'>#{time_diff(Time.now, a_obj[:status][:next_date])}</span>").downcase}</p>"
 
 - if session[:is_admin]
   - form_for :anime, url(:anime, :create), :id => "anime-form" do |f|

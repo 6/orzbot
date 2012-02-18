@@ -1,3 +1,4 @@
+- @title = @anime.title
 - content_for :header_right do
   =link_to 'English', url(:anime, :index, @anime.id), :class => I18n.locale == :en ? 'active' : ''
   =link_to '日本語', url(:anime, :index, @anime.id, :locale => 'ja'), :class => I18n.locale == :ja ? 'active' : ''

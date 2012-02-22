@@ -9,7 +9,7 @@ xml.rss "version" => "2.0", "xmlns:dc" => "http://purl.org/dc/elements/1.1/" do
       xml.item do
         xml.title I18n.locale == :en ? a[:model].title_en : a[:model].title_ja
         xml.description a[:on_air_now] ? t(:currently_airing) : (a[:model].airing? ? "#{t(:episode_x, :x => a[:status][:prev_episode_number]+1)} #{t(:airs_in_x, :x => time_diff(Time.now, a[:status][:next_date])).downcase}" : t(:starts_airing_x, :x => time_diff(a[:model].start_date, Time.now)))
-        xml.link "#{ENV['ROOT_URL']}#{url(:home)}"
+        xml.link "#{ENV['ROOT_URL']}#{url(:anime, :index, a[:model].id, :locale => locale_string)}"
       end
     end
   end

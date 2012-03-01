@@ -1,11 +1,15 @@
 Orzbot.controllers  do
   before do
     Encoding.default_internal = nil
-    I18n.locale = get_locale(params[:locale]) || :en
+    I18n.locale = get_locale(params[:locale] || params[:hl]) || :en
   end
   
   get :about do
     render :about
+  end
+  
+  get '/index.php' do
+    redirect url(:home, :locale => locale_string), 301
   end
   
   Orzbot.controllers :anime do

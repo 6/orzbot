@@ -26,7 +26,7 @@ Orzbot.controllers  do
       @anime = Anime.find(params[:id])
       params['anime'] = parse_anime_params(params[:anime])
       if @anime.andand.update_attributes(params[:anime])
-        redirect url(:home)
+        redirect url(@anime.started_airing? ? :home : :upcoming)
       else
         flash[:warning] = "Error!"
         redirect url(:anime, :edit, :id)
@@ -36,10 +36,12 @@ Orzbot.controllers  do
     post :create do
       params['anime'] = parse_anime_params(params[:anime])
       @anime = Anime.new(params[:anime])
-      unless @anime.save
+      if @anime.save
+        redirect url(@anime.started_airing? ? :home : :upcoming)
+      else
         flash[:warning] = "Error!"
+        redirect url(:home)
       end
-      redirect url(:home)
     end
     
     get :index, :map => "/anime/:id(/:locale)" do
